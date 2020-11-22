@@ -49,7 +49,35 @@ $stmt->execute();
     <div class="container" id="main">
 
       <div class="col-12 search">
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
+        <div class="row">
+          <input class="col-5" type="text" id="myInput" onkeyup="search()" placeholder="Search...">
+          <a class="col-5" id="advanced-button"><div>Advanced search</div></a>
+            <select class="col-2 advanced" id="advanced-department" onchange="">
+              <option value="" >Department</option>
+              <?php 
+                            require('conn.php');
+                            $sql = "SELECT id, name FROM department";
+                            $result = $conn->query($sql);
+                            foreach($result as $row){
+                              echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
+                            }
+
+              ?>
+            </select>
+            <select class="col-2 advanced" id="advanced-location" onchange="">
+              <option value="" >Location</option>
+              <?php 
+                              require('conn.php');
+                              $sql = "SELECT id, name FROM location";
+                              $result = $conn->query($sql);
+                              foreach($result as $row){
+                                echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
+                              }
+
+              ?>
+            </select>
+            <a class="col-1" id="remove-button"><div>Remove</div></a>
+        </div>
       </div>        
         
       <div class="profile-section">
@@ -79,7 +107,7 @@ $stmt->execute();
                   </div>
                 </a>
                 <div class="container" id="edit-delete">
-                  <button type="button" class="col-5" id="edit"> Edit </button>
+                  <button type="button" class="col-5" id="edit" data-toggle="modal"  data-target="#edit-modal"> Edit </button>
                   <form action="delete.php" method="post">
                     <button type="submit" name="id" value='.$row['id'].'>Delete</button>
                   </form>
@@ -122,7 +150,7 @@ $stmt->execute();
                     </tr>
                     <tr>
                       <td>Department:</td>
-                      <td><select name="department" id="department">
+                      <td><select name="department">
                         <?php 
                         require('conn.php');
                         $sql = "SELECT id, name FROM department";
@@ -132,12 +160,11 @@ $stmt->execute();
                         }
 
                         ?>
-                        <option value="Accounting">Accounting</option>
                       </select></td>
                     </tr>
                     <tr>
-                      <td>Department:</td>
-                      <td><select name="department" id="department">
+                      <td>Location:</td>
+                      <td><select name="location">
                         <?php 
                         require('conn.php');
                         $sql = "SELECT id, name FROM location";
@@ -163,8 +190,75 @@ $stmt->execute();
 
       <!-- Edit employee Bootstrap modal -->
       <div>
-          
-        
+        <div class="modal fade add" id="edit-modal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered add">
+                  
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="modalTitle">Edit Employee</h4>
+                  <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body" id="modalContent">
+                  <form action="edit.php" method="post">
+                    <table>
+                      <tr>
+                        <td>Employee Number: </td>
+                        <td><input type="text" name="id" value="" readonly></td>
+                      </tr>
+                      <tr>
+                        <td>First Name:</td>
+                        <td><input type="text" name="first-name" value=""></td>
+                      </tr>
+                      <tr>
+                        <td>Last Name:</td>
+                        <td><input type="text" name="last-name" value=""></td>
+                      </tr>
+                      <tr>
+                        <td>Email:</td>
+                        <td><input type="text" name="email" value=""></td>
+                      </tr>
+                      <tr>
+                        <td>Job Title:</td>
+                        <td><input type="text" name="job-title" value=""></td>
+                      </tr>
+                      <tr>
+                        <td>Department:</td>
+                        <td><select name="department" id="department">
+                          <?php 
+                          require('conn.php');
+                          $sql = "SELECT id, name FROM department";
+                          $result = $conn->query($sql);
+                          foreach($result as $row){
+                            echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
+                          }
+
+                          ?>
+                        </select></td>
+                      </tr>
+                      <tr>
+                        <td>Location:</td>
+                        <td><select name="location" id="location">
+                          <?php 
+                          require('conn.php');
+                          $sql = "SELECT id, name FROM location";
+                          $result = $conn->query($sql);
+                          foreach($result as $row){
+                            echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
+                          }
+
+                          ?>
+                        </select></td>
+                      </tr>
+                      <tr>
+                        <td colspan=2 id="submit"><input type="submit"></td>
+                      </tr>
+                    </table>
+                  </form>
+                </div>
+              </div>  
+            </div>
+        </div> 
       </div>
      
     <!-- Bootsrap required javascript - jQuery first, then Popper.js, then Bootstrap JS as stated in Bootstrap documentation-->
@@ -177,25 +271,6 @@ $stmt->execute();
 
     <!-- JavaScript -->
     <script type="text/javascript" src="./js/js.js"></script>
-    <script>
-            // Searchable list function
-function myFunction() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-};
-          </script>
   </body>
           
 </html>

@@ -4,17 +4,56 @@ $(".toggler-enabled").on("click", function() {
     expdiv.is(":visible")?expdiv.hide():expdiv.show();
 });
 
-// Function to 
-function reduce() {
-    var result = confirm("Are you sure you want to permanently delete?");
-    if (result) {
-    //Logic to delete the item
-}
+// Function to show and hide the advacned search options when a persons profile is clicked
+$("#advanced-button").on("click", function() {
+    var button = $("#advanced-button");
+    button.hide();
+    var deploc = button.siblings("select");
+    deploc.is(":visible")?deploc.hide():deploc.show();
+    var rembutton = button.siblings("a");
+    rembutton.is(":visible")?rembutton.hide():rembutton.show();
+});
+
+$("#remove-button").on("click", function() {
+    var rembutton = $("#remove-button");
+    rembutton.hide();
+    var deploc = rembutton.siblings("select");
+    deploc.is(":visible")?deploc.hide():deploc.show();
+    var advance = rembutton.siblings("a");
+    advance.is(":visible")?advance.hide():advance.show();
+});
+
+// Search through list function
+function search() {
+    var input, filter, ul, li, a, i, txtValue;
+    // Set input as the value in the text search
+    input = document.getElementById("myInput");
+    // Convert the text search to all uppercase
+    filter = input.value.toUpperCase();
+    // Set ul as the ul element which is the personnel list
+    ul = document.getElementById("myUL");
+    // Set the li ans the indivdual personnel
+    li = ul.getElementsByTagName("li");
+    // Loop through the entire list 
+    for (i = 0; i < li.length; i++) {
+        // Set a as the element of a which is contains all the information such as name 
+        a = li[i].getElementsByTagName("a")[0];
+        // Sets txt value to the text content of the node and all its decendants using .textContent and using .innetText
+        // does the same but is aware of rendered text too so no information is missed
+        txtValue = a.textContent || a.innerText;
+        // Conditional statement to compare the text content set to uppercase to the index of it in the filter string if the text is in the results
+        // the position is given which will be greater than one, if there is no result for it then a -1 is given
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            // If result matches search the display is kept the same keeping it visible
+            li[i].style.display = "";
+        } else {
+            // If the result does not match the item is hidden
+            li[i].style.display = "none";
+        }
+    }
 };
 
-function sure() {
-    confirm("Are you sure you want to permanently delete?")
-};
+
 // Function which returns the error for an ajax call depending on the error number and log to console
 function errorajx(jqXHR, exception) {
 
@@ -38,24 +77,19 @@ function errorajx(jqXHR, exception) {
 };
 
 
-/*
-$.each(result.data, function(index) {
-    $('.profile-selection').append(profile(
-        result.data.first,
-        result.data.last,
-        result.data.ID,
-        result.data.jobTitle,
-        result.data.email,
-        result.data.department,
-        result.data.location,
-    )
-    /*
-        $("<option>", {
-        value: result.data[index].code,
-        text: result.data[index].name
-    })); 
-}); 
 
+//  Function to 
+// function reduce() {
+//     var result = confirm("Are you sure you want to permanently delete?");
+//     if (result) {
+//     //Logic to delete the item
+// }
+// };
+// function sure() {
+//     confirm("Are you sure you want to permanently delete?")
+// };
+
+/*
 function profile(first, last, ID, jobTitle, email, department, location) {
     '<div>' +
         '<a class="list-group-item list-group-item-action flex-column align-items-start toggler-enabled" >' +

@@ -87,3 +87,42 @@ button#delete.col-5 {
 #myUL {
     padding: 0;
 }
+
+.advanced {
+    display: none;
+}
+
+#remove-button {
+    display: none;
+}
+
+#myInput {
+    margin-left: 15px;
+}
+
+#advanced-button div{
+    font-size: x-small;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-left: 10px;
+    padding: 2px;
+    border: solid black 1px;
+    border-radius: 5px;
+    box-shadow: gray 5px;
+    background-color: lightgrey;
+}
+
+#remove-button div{
+    font-size: x-small;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-left: 10px;
+    padding: 2px;
+    border: solid black 1px;
+    border-radius: 5px;
+    box-shadow: gray 5px;
+    background-color: lightgrey;
+}
+
