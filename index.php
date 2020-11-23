@@ -52,29 +52,11 @@ $stmt->execute();
         <div class="row">
           <input class="col-5" type="text" id="myInput" onkeyup="search()" placeholder="Search...">
           <a class="col-5" id="advanced-button"><div>Advanced search</div></a>
-            <select class="col-2 advanced" id="advanced-department" onchange="">
+            <select class="col-2 advanced" id="advanced-department" onchange="" id="depSel">
               <option value="" >Department</option>
-              <?php 
-                            require('conn.php');
-                            $sql = "SELECT id, name FROM department";
-                            $result = $conn->query($sql);
-                            foreach($result as $row){
-                              echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
-                            }
-
-              ?>
             </select>
-            <select class="col-2 advanced" id="advanced-location" onchange="">
+            <select class="col-2 advanced" id="advanced-location" onchange="" id="locSel">
               <option value="" >Location</option>
-              <?php 
-                              require('conn.php');
-                              $sql = "SELECT id, name FROM location";
-                              $result = $conn->query($sql);
-                              foreach($result as $row){
-                                echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
-                              }
-
-              ?>
             </select>
             <a class="col-1" id="remove-button"><div>Remove</div></a>
         </div>
@@ -107,9 +89,9 @@ $stmt->execute();
                   </div>
                 </a>
                 <div class="container" id="edit-delete">
-                  <button type="button" class="col-5" id="edit" data-toggle="modal"  data-target="#edit-modal"> Edit </button>
+                  <button type="button" class="col-5" id="edit" name="edit" data-toggle="modal"  data-target="#edit-modal" value='.$row['id'].'> Edit </button>
                   <form action="delete.php" method="post">
-                    <button type="submit" name="id" value='.$row['id'].'>Delete</button>
+                    <button type="submit" class="col-5 delete" name="id" value='.$row['id'].'>Delete</button>
                   </form>
                 </div>
               </div></li>';
@@ -150,30 +132,12 @@ $stmt->execute();
                     </tr>
                     <tr>
                       <td>Department:</td>
-                      <td><select name="department">
-                        <?php 
-                        require('conn.php');
-                        $sql = "SELECT id, name FROM department";
-                        $result = $conn->query($sql);
-                        foreach($result as $row){
-                          echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
-                        }
-
-                        ?>
+                      <td><select name="department" id="depSel">
                       </select></td>
                     </tr>
                     <tr>
                       <td>Location:</td>
-                      <td><select name="location">
-                        <?php 
-                        require('conn.php');
-                        $sql = "SELECT id, name FROM location";
-                        $result = $conn->query($sql);
-                        foreach($result as $row){
-                          echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
-                        }
-
-                        ?>
+                      <td><select name="location" id="locSel">
                       </select></td>
                     </tr>
                     <tr>
@@ -200,7 +164,57 @@ $stmt->execute();
                   <button type="button" class="close" data-dismiss="modal">x</button>
                 </div>
                 <div class="modal-body" id="modalContent">
+                <?php
+                  if(isset($_POST['edit'])){
+                  include("conn.php");
+                  $sql = "SELECT firstName, lastName, email, departmentID FROM personnel WHERE id = ".$_POST['edit'];
+                  $result = $conn->query($sql);
+                  $person = $result->fetch();
+                  $sql = "SELECT name, locationID FROM department WHERE id = ".$row['departmentID'];
+                  $result = $conn->query($sql);
+                  $department = $result->fetch();
+                  $sql = "SELECT name FROM location WHERE id = ".$department['locationID'];
+                  $result = $conn->query($sql);
+                  $location = $result->fetch();
+                  echo '
                   <form action="edit.php" method="post">
+                  <table>
+                    <tr>
+                      <td>Employee Number: </td>
+                      <td><input type="text" name="id" value='.$person['id'].' readonly></td>
+                    </tr>
+                    <tr>
+                      <td>First Name:</td>
+                      <td><input type="text" name="first-name" value='.$person['firstName'].'></td>
+                    </tr>
+                    <tr>
+                      <td>Last Name:</td>
+                      <td><input type="text" name="last-name" value='.$person['lastName'].'></td>
+                    </tr>
+                    <tr>
+                      <td>Email:</td>
+                      <td><input type="text" name="email" value='.$person['email'].'></td>
+                    </tr>
+                    <tr>
+                      <td>Job Title:</td>
+                      <td><input type="text" name="job-title" value='.$person['jobTitle'].'></td>
+                    </tr>
+                    <tr>
+                      <td>Department:</td>
+                      <td><select name="department" id="depSel">
+                      </select></td>
+                    </tr>
+                    <tr>
+                      <td>Location:</td>
+                      <td><select name="location" id="locSel">
+                      </select></td>
+                    </tr>
+                    
+                  ';
+                  }
+                  
+                ?>
+                  <!-- <form action="edit.php" method="post">
                     <table>
                       <tr>
                         <td>Employee Number: </td>
@@ -226,26 +240,26 @@ $stmt->execute();
                         <td>Department:</td>
                         <td><select name="department" id="department">
                           <?php 
-                          require('conn.php');
-                          $sql = "SELECT id, name FROM department";
-                          $result = $conn->query($sql);
-                          foreach($result as $row){
-                            echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
-                          }
+                      //     require('conn.php');
+                      //     $sql = "SELECT id, name FROM department";
+                      //     $result = $conn->query($sql);
+                      //     foreach($result as $row){
+                      //       echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
+                      //     }
 
-                          ?>
-                        </select></td>
-                      </tr>
-                      <tr>
-                        <td>Location:</td>
-                        <td><select name="location" id="location">
-                          <?php 
-                          require('conn.php');
-                          $sql = "SELECT id, name FROM location";
-                          $result = $conn->query($sql);
-                          foreach($result as $row){
-                            echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
-                          }
+                      //     ?>
+                      //   </select></td>
+                      // </tr>
+                      // <tr>
+                      //   <td>Location:</td>
+                      //   <td><select name="location" id="location">
+                      //     <?php 
+                      //     require('conn.php');
+                      //     $sql = "SELECT id, name FROM location";
+                      //     $result = $conn->query($sql);
+                      //     foreach($result as $row){
+                      //       echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
+                      //     }
 
                           ?>
                         </select></td>
@@ -259,7 +273,7 @@ $stmt->execute();
               </div>  
             </div>
         </div> 
-      </div>
+      </div> -->
      
     <!-- Bootsrap required javascript - jQuery first, then Popper.js, then Bootstrap JS as stated in Bootstrap documentation-->
     <script type="text/javascript" src="./packages/bootstrap/jquery-3.4.1.min.js"></script>

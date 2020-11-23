@@ -23,6 +23,60 @@ $("#remove-button").on("click", function() {
     advance.is(":visible")?advance.hide():advance.show();
 });
 
+    $.ajax({
+            url: "depList.php",
+            type: 'POST',
+            dataType: 'json',
+            success: function(result) {
+                console.log(result);
+                //echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
+                for (i=0; i<result.length; i++) {
+
+                    $("#depSel").append('<option value=' + result[i]['id'] + '>' + result[i]['name'] + '</option>')
+                }
+
+            },
+            error: function(jqXHR, exception){
+                errorajx(jqXHR, exception);
+                console.log("Get Department");
+            }
+        }); 
+
+
+        $.ajax({
+            url: "getLoc.php",
+            type: 'POST',
+            dataType: 'json',
+            success: function(result) {
+                console.log(result);
+                //echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
+                for (i=0; i<result.length; i++) {
+
+                    $("#locSel").append('<option value=' + result[i]['id'] + '>' + result[i]['name'] + '</option>')
+                }
+
+            },
+            error: function(jqXHR, exception){
+                errorajx(jqXHR, exception);
+                console.log("Get Locaiton");
+            }
+        }); 
+// $.ajax({
+//     url: "getall.php",
+//     type: 'POST',
+//     dataType: 'json',
+//     success: function(result) {
+//         $.each(result, function(index) {
+//             $('#myUL').append('<li><div class="list-group-item list-group-item-action flex-column align-items-start toggler-enabled" id="profile"><a><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' + result[index]['firstName'] + ' ' +  result[index]['lastName'] + '</h5><small>' + result[index]['id'] + '</small></div><div><p class="mb-1">' + result[index]['email'] + '</p><p class="mb-1">' + result[index]['department'] + '</p><p class="mb-1">' + result[index]['location'] + '</p></div></a><div class="container" id="edit-delete"><button type="button" class="col-5" id="edit" data-toggle="modal"  data-target="#edit-modal"> Edit </button><form action="delete.php" method="post"><button type="submit" name="id" value=' + result[index]['id'] + '>Delete</button></form></div></div></li>'); 
+//         }); 
+        
+//     },
+//     error: function(jqXHR, exception){
+//         errorajx(jqXHR, exception);
+//         console.log("Option select");
+//     }
+// }); 
+
 // Search through list function
 function search() {
     var input, filter, ul, li, a, i, txtValue;

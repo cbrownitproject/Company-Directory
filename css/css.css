@@ -72,8 +72,8 @@ html, body {
     background-color: royalblue;
 }
 
-button#delete.col-5 {
-    background-color: red;
+button.col-5.delete {
+    background-color: red !important;
 }
 
 #profile {
