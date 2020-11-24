@@ -115,6 +115,10 @@ td#submit input#addEmployeeSubmit {
     text-align: center;
 }
 
+.editClass {
+    width: -webkit-fill-available;
+}
+
 .modal-content {
     align-items: center;
     width: auto;
@@ -136,6 +140,14 @@ select#locSel {
 }
 
 select#locationSel {
+    width: -webkit-fill-available;
+}
+
+select#editLoc {
+    width: -webkit-fill-available;
+}
+
+select#editDep {
     width: -webkit-fill-available;
 }
 
@@ -184,16 +196,10 @@ button.confdel {
     border-radius: 10px;
 }
 
-#myUL li {
+#profiles {
+    padding: 0;
     list-style-type: none;
 }
-
-#myUL {
-    padding: 0;
-}
-
-
-
 
 #myInput {
     margin-left: 15px;
