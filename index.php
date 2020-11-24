@@ -67,7 +67,6 @@
         <ul id="profiles">
 
         </ul>
-        
 
       <!-- Edit employee Bootstrap modal -->
       <div>
@@ -82,7 +81,7 @@
                   </div>
                   <div class="modal-body" id="edit-modalContent">
                     <!-- Form which is sent to edit.php when submitted, this updates users profiles -->
-                    <form action="edit.php" method="post">
+                    <form action="php/edit.php" method="post">
                       <table>
                         <tr>
                         <td>Employee Number: </td>
@@ -136,7 +135,7 @@
                   <button type="button" class="close" data-dismiss="modal">x</button>
                 </div>
                 <div class="modal-body employee" id="modalContent">
-                  <form action="addPerson.php" method="post">
+                  <form action="php/addPerson.php" method="post">
                     <table id="employeeModalTable">
                       <tr >
                         <td>First Name:</td>
@@ -194,7 +193,7 @@
                         <th>ID</th>
                       </tr>
                     </table></br>
-                  <form action="addDepartment.php" method="post">
+                  <form action="php/addDepartment.php" method="post">
                     <table>
                       <tr>
                         <th colspan="2"> Add New Department </th>
@@ -239,7 +238,7 @@
                         <th>Delete</th>
                       </tr>
                     </table></br>
-                  <form action="addLocation.php" method="post" id="locationAddForm" >
+                  <form action="php/addLocation.php" method="post" id="locationAddForm" >
                     <table>
                       <tr>
                         <th colspan="3">Add New Location</th>
