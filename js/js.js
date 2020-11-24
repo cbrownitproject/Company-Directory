@@ -6,107 +6,134 @@ $(".toggler-enabled").on("click", function() {
 
 // Function to show and hide the advacned search options when a persons profile is clicked
 $("#advanced-button").on("click", function() {
-    var button = $("#advanced-button");
-    button.hide();
-    var deploc = button.siblings("select");
-    deploc.is(":visible")?deploc.hide():deploc.show();
-    var rembutton = button.siblings("a");
-    rembutton.is(":visible")?rembutton.hide():rembutton.show();
+    $("#advanced-button").hide();
+    $("#advancedRow").is(":visible")?$("#advancedRow").hide():$("#advancedRow").show();
+    $("#remove-button").is(":visible")?$("#remove-button").hide():$("#remove-button").show();
 });
 
 $("#remove-button").on("click", function() {
-    var rembutton = $("#remove-button");
-    rembutton.hide();
-    var deploc = rembutton.siblings("select");
-    deploc.is(":visible")?deploc.hide():deploc.show();
-    var advance = rembutton.siblings("a");
-    advance.is(":visible")?advance.hide():advance.show();
+    $("#remove-button").hide();
+    $("#advancedRow").is(":visible")?$("#advancedRow").hide():$("#advancedRow").show();
+    $("#advanced-button").is(":visible")?$("#advanced-button").hide():$("#advanced-button").show();
+    $('.loca').val('all').trigger('change');
+    $('.dept').val('all').trigger('change');
 });
 
-    $.ajax({
-            url: "depList.php",
-            type: 'POST',
-            dataType: 'json',
-            success: function(result) {
-                console.log(result);
-                //echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
-                for (i=0; i<result.length; i++) {
-
-                    $("#depSel").append('<option value=' + result[i]['id'] + '>' + result[i]['name'] + '</option>')
-                }
-
-            },
-            error: function(jqXHR, exception){
-                errorajx(jqXHR, exception);
-                console.log("Get Department");
-            }
-        }); 
-
-
-        $.ajax({
-            url: "getLoc.php",
-            type: 'POST',
-            dataType: 'json',
-            success: function(result) {
-                console.log(result);
-                //echo '<option value='.$row['id'].'>'.$row['name'].'</option>'; 
-                for (i=0; i<result.length; i++) {
-
-                    $("#locSel").append('<option value=' + result[i]['id'] + '>' + result[i]['name'] + '</option>')
-                }
-
-            },
-            error: function(jqXHR, exception){
-                errorajx(jqXHR, exception);
-                console.log("Get Locaiton");
-            }
-        }); 
-// $.ajax({
-//     url: "getall.php",
-//     type: 'POST',
-//     dataType: 'json',
-//     success: function(result) {
-//         $.each(result, function(index) {
-//             $('#myUL').append('<li><div class="list-group-item list-group-item-action flex-column align-items-start toggler-enabled" id="profile"><a><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' + result[index]['firstName'] + ' ' +  result[index]['lastName'] + '</h5><small>' + result[index]['id'] + '</small></div><div><p class="mb-1">' + result[index]['email'] + '</p><p class="mb-1">' + result[index]['department'] + '</p><p class="mb-1">' + result[index]['location'] + '</p></div></a><div class="container" id="edit-delete"><button type="button" class="col-5" id="edit" data-toggle="modal"  data-target="#edit-modal"> Edit </button><form action="delete.php" method="post"><button type="submit" name="id" value=' + result[index]['id'] + '>Delete</button></form></div></div></li>'); 
-//         }); 
-        
-//     },
-//     error: function(jqXHR, exception){
-//         errorajx(jqXHR, exception);
-//         console.log("Option select");
-//     }
-// }); 
-
-// Search through list function
-function search() {
-    var input, filter, ul, li, a, i, txtValue;
-    // Set input as the value in the text search
-    input = document.getElementById("myInput");
-    // Convert the text search to all uppercase
-    filter = input.value.toUpperCase();
-    // Set ul as the ul element which is the personnel list
-    ul = document.getElementById("myUL");
-    // Set the li ans the indivdual personnel
-    li = ul.getElementsByTagName("li");
-    // Loop through the entire list 
-    for (i = 0; i < li.length; i++) {
-        // Set a as the element of a which is contains all the information such as name 
-        a = li[i].getElementsByTagName("a")[0];
-        // Sets txt value to the text content of the node and all its decendants using .textContent and using .innetText
-        // does the same but is aware of rendered text too so no information is missed
-        txtValue = a.textContent || a.innerText;
-        // Conditional statement to compare the text content set to uppercase to the index of it in the filter string if the text is in the results
-        // the position is given which will be greater than one, if there is no result for it then a -1 is given
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            // If result matches search the display is kept the same keeping it visible
-            li[i].style.display = "";
-        } else {
-            // If the result does not match the item is hidden
-            li[i].style.display = "none";
+$.ajax({
+    url: "depList.php",
+    type: 'POST',
+    dataType: 'json',
+    success: function(result) {
+        for (i=0; i<result.length; i++) {
+            $("#depSel").append('<option value=' + result[i]['id'] + '>' + result[i]['name'] + '</option>')
+            $("#dept").append('<option value=' + result[i]['id'] + '>' + result[i]['name'] + '</option>')
+            $("#deptModal").append('<tr><td>' + result[i]['name'] + '</td><td>' + result[i]['id'] + '</td><td><form action="deleteDepartment.php" method="post"><button type="submit" name="id" class="confdel" value=' + result[i]['id'] + '>Delete</button></form></td></tr>')
         }
+
+    },
+    error: function(jqXHR, exception){
+        errorajx(jqXHR, exception);
+        console.log("Get Department");
     }
+}); 
+
+
+    $.ajax({
+        url: "getLoc.php",
+        type: 'POST',
+        dataType: 'json',
+        success: function(result) {
+
+            for (i=0; i<result.length; i++) {
+                $("#locSel").append('<option value=' + result[i]['id'] + '>' + result[i]['name'] + '</option>')
+                $("#loca").append('<option value=' + result[i]['id'] + '>' + result[i]['name'] + '</option>')
+                $("#locationSel").append('<option value=' + result[i]['id'] + '>' + result[i]['name'] + '</option>')
+                $("#locationModal").append('<tr><td>' + result[i]['name'] + '</td><td>' + result[i]['id'] + '</td><td><form action="deleteLocation.php" method="post"><button type="submit" name="id" class="confdel" value=' + result[i]['id'] + '>Delete</button></form></td></tr>')
+            }
+
+            $('.confdel').on("click", function areYouSure() { 
+                if (confirm('Are you sure you want to permanently delete?')) {
+                    $('.confdel').submit()
+                } else {
+                    return false;
+                }
+            });  
+        },
+        error: function(jqXHR, exception){
+            errorajx(jqXHR, exception);
+            console.log("Get Locaiton");
+        }
+    }); 
+
+
+
+function showModal(data) {
+    
+    console.log(data);
+    //you can do anything with data, or pass more data to this function. i set this data to modal header for example
+    $.ajax({
+        url: "editEmployee.php",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            id: data
+        },
+        success: function(result) {
+            console.log(result);
+            
+            $("#edit-modal").modal();
+
+        },
+        error: function(jqXHR, exception){
+            errorajx(jqXHR, exception);
+            console.log("Edit Employee");
+        }
+    }); 
 };
 
+
+$("#dept").change(function() {
+    select();
+});
+$("#search").keyup(function() {
+    select();
+});
+$("#loca").change(function() {
+    select();
+});
+  
+select = function() {
+    var department = $(".dept").val();
+    var search = $("#search").val();
+    var location = $(".loca").val();
+  
+    $(".box").hide();
+    var boxes = $(".box").filter(function(index) {
+
+        return (department === 'all' || $(this).attr("data-department") === department) &&
+        ((!search || $(this).attr("data-first").toLowerCase().indexOf(search.toLowerCase()) >= 0 ) ||
+        // (!search || $(this).attr("data-last").toLowerCase().indexOf(search.toLowerCase()) >= 0 ) ||
+        (!search || $(this).attr("data-email").toLowerCase().indexOf(search.toLowerCase()) >= 0 ) ||
+        (!search || $(this).attr("data-id").toLowerCase().indexOf(search.toLowerCase()) >= 0 )) &&
+        (location === 'all' || $(this).attr("data-location") === location)
+    });
+    boxes.show();
+  
+};
+  
+
+
+$('.confdel').click(function areYouSure() {
+    console.log("test");
+    if (confirm('Are you sure you want to permanently delete?')) {
+        $('.confdel').submit()
+    } else {
+        return false;
+    }
+});
+
+
+  
 
 // Function which returns the error for an ajax call depending on the error number and log to console
 function errorajx(jqXHR, exception) {
@@ -129,53 +156,3 @@ function errorajx(jqXHR, exception) {
         }
         console.log(msg);
 };
-
-
-
-//  Function to 
-// function reduce() {
-//     var result = confirm("Are you sure you want to permanently delete?");
-//     if (result) {
-//     //Logic to delete the item
-// }
-// };
-// function sure() {
-//     confirm("Are you sure you want to permanently delete?")
-// };
-
-/*
-function profile(first, last, ID, jobTitle, email, department, location) {
-    '<div>' +
-        '<a class="list-group-item list-group-item-action flex-column align-items-start toggler-enabled" >' +
-        '<div class="d-flex w-100 justify-content-between">' +
-            '<h5 class="mb-1">' + first + last +'</h5>' +
-            '<small>' + ID + '</small>' +
-        '</div>' +
-        '<div>' +
-        '<p class="mb-1">' + jobTitle + '</p>' +
-        '<p class="mb-1">' + email + '</p>' +
-        '<p class="mb-1">' + department + '</p>' +
-        '<p class="mb-1">' + location +'</p>' +
-        '</div>' +
-        '</a>' +
-        '<div class="container" id="edit-delete">' +
-        '<button type="button" class="col-5" id="edit"> Edit </button>' +
-        '<button type="button" class="col-5" id="delete" data-toggle="modal"  data-target="#delete-modal"> Delete </button>' +
-        '</div>' +
-    '</div>'
-};
-
-
-$.ajax({
-    url: "libs/php/getAll.php",
-    type: 'POST',
-    dataType: 'json',
-    success: function(result) {
-        console.log(result);
-    },
-    error: function(jqXHR, exception){
-        errorajx(jqXHR, exception);
-        console.log("Option select");
-    }
-}); 
-*/

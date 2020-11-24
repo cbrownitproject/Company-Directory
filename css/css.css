@@ -10,6 +10,18 @@ html, body {
     margin-right: auto;
 }
 
+.nav-button {
+    margin: 5px;
+    border-radius: 5px;
+    background-color:  #4fff4c;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    font-size: xx-large;
+    font-weight: 600;
+}
+
+
 #main {
     width: 95%;
     border: solid black 1px;
@@ -17,87 +29,30 @@ html, body {
     height: 90%;
 }
 
-#title {
-    margin: 10px 0px;
-    font-size: x-large;
+#deptIcon {
+    width:40px;
+    height:40px;
+    padding-bottom: 10px;
 }
 
-.nav-button {
-    margin: 5px;
-    border-radius: 5px;
-    background-color:  #4fff4c;
-    margin-left: auto;
-    padding: 0;
-    font-size: xx-large;
-    font-weight: 600;
-}
 
 #search {
     width: 100%;
-}
-
-.search{
-    margin: 10px 0px;
-    padding: 0;
-}
-#radio {
-    text-align: right;
-}
-
-#submit {
-    text-align: center;
-}
-
-.modal-content {
-    align-items: center;
-    width: auto;
-    margin: 0 auto;
-}
-
-#edit-delete {
-    margin: 10px 0px;
-    display: none;
-    text-align: center;
-}
-
-.profile-section {
-    height: 90%;
-    overflow-y: scroll;
-}
-
-#edit-delete.container button {
-    border-radius: 5px;
-    font-weight: 500;
-    border: solid black 2px;
-    background-color: royalblue;
-}
-
-button.col-5.delete {
-    background-color: red !important;
-}
-
-#profile {
-    border-radius: 10px;
-}
-
-#myUL li {
-    list-style-type: none;
-}
-
-#myUL {
-    padding: 0;
-}
-
-.advanced {
-    display: none;
+    margin-left: 16px;
 }
 
 #remove-button {
     display: none;
 }
 
-#myInput {
-    margin-left: 15px;
+#advancedRow {
+    display: none;
+    margin-left: 0px;
+ 
+}
+
+.advanced {
+    display: none;
 }
 
 #advanced-button div{
@@ -125,4 +80,123 @@ button.col-5.delete {
     box-shadow: gray 5px;
     background-color: lightgrey;
 }
+
+
+#remove-button {
+    display: none;
+}
+
+.search{
+    margin: 10px 0px;
+    padding: 0;
+}
+
+.modal-header {
+    position: relative;
+    min-width: -webkit-fill-available;
+    justify-content: center;
+}
+
+.modal-header button.close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+#employeeModalTable td input {
+    width: -webkit-fill-available;
+}
+
+td#submit input#addEmployeeSubmit {
+    width: auto;
+}
+
+#submit {
+    text-align: center;
+}
+
+.modal-content {
+    align-items: center;
+    width: auto;
+    margin: 0 auto;
+}
+
+#edit-delete {
+    margin: 10px 0px;
+    display: none;
+    text-align: center;
+}
+
+select#locSel {
+    width: -webkit-fill-available;
+}
+
+#locationModal {
+    margin:auto;
+}
+
+select#locationSel {
+    width: -webkit-fill-available;
+}
+
+button.close {
+    margin-left: auto;
+}
+
+td {
+    padding: 5px 15px;
+    
+}
+
+th {
+    text-align: center;
+}
+
+#locationAddForm {
+    text-align: -webkit-center;
+}
+
+.modal-body {
+    text-align: center;
+}
+
+.profile-section {
+    height: 90%;
+    overflow-y: scroll;
+}
+
+#edit-delete.container button {
+    border-radius: 5px;
+    font-weight: 500;
+    border: solid black 2px;
+    background-color: royalblue;
+}
+
+button.col-5.delete {
+    background-color: red !important;
+}
+
+button.confdel {
+    background-color: red !important;
+}
+
+#profile {
+    border-radius: 10px;
+}
+
+#myUL li {
+    list-style-type: none;
+}
+
+#myUL {
+    padding: 0;
+}
+
+
+
+
+#myInput {
+    margin-left: 15px;
+}
+
 
