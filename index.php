@@ -38,7 +38,7 @@
     
     
     <div class="container" id="main">
-      
+
       <!-- Div search bar and extended advance search which opens when click on button -->
       <div class="col-12 search" id="changes">
         <div class="col-12 search">
@@ -81,7 +81,7 @@
                   </div>
                   <div class="modal-body" id="edit-modalContent">
                     <!-- Form which is sent to edit.php when submitted, this updates users profiles -->
-                    <form action="php/edit.php" method="post">
+                    <form id="editPerson">
                       <table>
                         <tr>
                         <td>Employee Number: </td>
@@ -135,32 +135,27 @@
                   <button type="button" class="close" data-dismiss="modal">x</button>
                 </div>
                 <div class="modal-body employee" id="modalContent">
-                  <form action="php/addPerson.php" method="post">
+                  <form id="addPerson">
                     <table id="employeeModalTable">
                       <tr >
                         <td>First Name:</td>
-                        <td><input type="text" name="first-name" placeholder="John" pattern="[a-zA-Z]+(?:[ '-][a-zA-Z]+)*" maxlength="21" required></td>
+                        <td><input type="text" id="addName" name="first-name" placeholder="John" pattern="[a-zA-Z]+(?:[ '-][a-zA-Z]+)*" maxlength="21" required></td>
                       </tr>
                       <tr>
                         <td>Last Name:</td>
-                        <td><input type="text" name="last-name" placeholder="Smith" pattern="[a-zA-Z]+(?:[ '-][a-zA-Z]+)*" maxlength="21" required></td>
+                        <td><input type="text" id="addLast" name="last-name" placeholder="Smith" pattern="[a-zA-Z]+(?:[ '-][a-zA-Z]+)*" maxlength="21" required></td>
                       </tr>
                       <tr>
                         <td>Email:</td>
-                        <td><input type="email" name="email" placeholder="email@company.co.uk" required></td>
+                        <td><input type="email" id="addEmail" name="email" placeholder="email@company.co.uk" required></td>
                       </tr>
                       <tr>
                         <td>Job Title:</td>
-                        <td><input type="text" name="job-title" placeholder="Accountant" pattern="[a-zA-Z]+(?:[ '-][a-zA-Z]+)*" maxlength="21" required></td>
+                        <td><input type="text" id="addJob" name="job-title" placeholder="Accountant" pattern="[a-zA-Z]+(?:[ '-][a-zA-Z]+)*" maxlength="21" required></td>
                       </tr>
                       <tr>
                         <td>Department:</td>
                         <td><select name="department" id="depSel" required>
-                        </select></td>
-                      </tr>
-                      <tr>
-                        <td>Location:</td>
-                        <td><select name="location" id="locSel" required>
                         </select></td>
                       </tr>
                       <tr>
@@ -193,14 +188,14 @@
                         <th>ID</th>
                       </tr>
                     </table></br>
-                  <form action="php/addDepartment.php" method="post">
+                  <form id="addDepartment">
                     <table>
                       <tr>
                         <th colspan="2"> Add New Department </th>
                       </tr>
                       <tr>
                         <td>Department Name: </td>
-                        <td><input type="text" name="department" placeholder="Accoutning" pattern="[a-zA-Z]+(?:[ '-][a-zA-Z]+)*" maxlength="21" required></td>
+                        <td><input id="departName" type="text" name="department" placeholder="Accoutning" pattern="[a-zA-Z]+(?:[ '-][a-zA-Z]+)*" maxlength="21" required></td>
                       </tr>
                       <tr>
                         <td>Department Location: </td>
@@ -238,13 +233,13 @@
                         <th>Delete</th>
                       </tr>
                     </table></br>
-                  <form action="php/addLocation.php" method="post" id="locationAddForm" >
+                  <form id="locationAddForm" >
                     <table>
                       <tr>
                         <th colspan="3">Add New Location</th>
                       </tr>
                       <tr>
-                      <td colspan="3"><input type="text" name="location" placeholder="London" pattern="[a-zA-Z]+(?:[ '-][a-zA-Z]+)*" maxlength="21" required></td>
+                      <td colspan="3"><input id="addLoc" type="text" name="location" placeholder="London" pattern="[a-zA-Z]+(?:[ '-][a-zA-Z]+)*" maxlength="21" required></td>
                       </tr>
                       <tr>
                         <td colspan="3" id="submit"><input type="submit" value="Add"></td>

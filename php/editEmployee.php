@@ -18,8 +18,16 @@
   $holder['lastName'] = $person['lastName'];
   $holder['id'] = $person['id'];
   $holder['email'] = $person['email'];
-  $holder['department'] = $person['departmentID'];
-  $holder['location'] = $department['locationID'];
+  if (isset($person['departmentID'])){
+    $holder['department'] = $person['departmentID'];
+  } else {
+    $holder['department'] =  "No Department";
+  }
+  if (isset($department['locationID'])) {
+    $holder['location'] = $department['locationID'];
+  } else {
+    $holder['location'] = "No Locaiton";
+  }
   $holder['job'] = $person['jobTitle'];
 
   // Echo out the data  to be used

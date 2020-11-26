@@ -151,6 +151,10 @@ select#editDep {
     width: -webkit-fill-available;
 }
 
+select#depSel {
+    width: -webkit-fill-available;
+}
+
 button.close {
     margin-left: auto;
 }

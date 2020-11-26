@@ -12,10 +12,30 @@
         // Upper case words function used  after using to lowercase to ensure that  all data is the same
         $stmt->bindParam(':name', ucwords(strtolower($_POST['location'])));
         // Execute the statement to update the database
-        $stmt->execute();
-    }
+        $result = $stmt->execute();
+
+        if (!$result) {
+
+            $output['status']['code'] = "400";
+            $output['status']['name'] = "executed";
+            $output['status']['description'] = "query failed";	
+            $output['data'] = [];
     
-    // Return back to index.php page
-    header("Location: ../index.php");
+            mysqli_close($conn);
+    
+            echo json_encode($output); 
+    
+            exit;
+    
+        }
+    
+        $output['status']['code'] = "200";
+        $output['status']['name'] = "ok";
+        $output['status']['description'] = "success";
+        $output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+        $output['data'] = [];
+    
+        echo json_encode($output);
+    }
 
 ?>
