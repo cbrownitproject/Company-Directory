@@ -67,9 +67,10 @@
         </div>
       </div>
       
-
       <!-- Section containing the list of employees that furfil the search criteria (all if no criteria) -->
       <div class="profile-section">
+        <!-- scroll back to top button -->
+        <a href="#" id="scroll" style="display: none;"><span></span></a>
         <!-- Employee's profiles go in this un-ordered list element -->
         <div class="container">
           <ul class="row justify-content-md-center" id="profiles">
@@ -236,14 +237,12 @@
                   <div class="modal-body" id="modalContent">
                     <table id="editDeptModal">
                       <tr>
-                        <td>Department ID: </td>
-                        <!-- This input uses readonly as the department ID is the primary key and so will be automatically given to the department
-                            and cannot be changed -->
-                        <td><input type="text" class="editClass" name="id"  id="depValEdit"  readonly></td>
+                        <td>Department Location: </td>
+                        <td><select name="location" id="editDepLoca" required></select><input name="id" id="depValEdit"  readonly></td>
                       </tr>
                       <tr>
                         <td>Department:</td>
-                        <td><input type="text" class="editClass" name="job-title" id="editDepModal" pattern="[a-zA-Z]+(?:[ '-][a-zA-Z]+)*" maxlength="21" required></td>
+                        <td><input type="text" class="editClass" id="editDepModal" pattern="[a-zA-Z]+(?:[ '-][a-zA-Z]+)*" maxlength="21" required></td>
                       </tr>
                     </table>
                   </div>
@@ -353,9 +352,8 @@
                   <div class="modal-body" id="modalContent">
                       <table id="editLocaModal">
                         <tr>
-                          <td>Location ID: </td>
                           <!-- This input uses readonly as the department ID is the primary key and so will be automatically given to the department
-                              and cannot be changed -->
+                              and cannot be changed and is hidden as it just stores values -->
                           <td><input type="text" class="editClass" name="id"  id="editLocationId"  readonly></td>
                         </tr>
                         <tr>

@@ -7,9 +7,10 @@
         include("conn.php");
     
         // Establish a statement to use in SQL where we are editing data in the table personnel
-        $stmt = $conn->prepare("UPDATE department SET name = :name WHERE id = :id");
+        $stmt = $conn->prepare("UPDATE department SET name = :name, locationID = :locationID WHERE id = :id");
         // Use bind param to pass variable to use in the SQL statement 
         $stmt->bindParam(':name', ucwords(strtolower($_POST['name'])));
+        $stmt->bindParam(':locationID', $_POST['location']);
         $stmt->bindParam(':id', $_POST['id']);
         // Execute the statment
         $result = $stmt->execute();

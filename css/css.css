@@ -54,6 +54,22 @@ html, body {
         height: 73vh;
         overflow-y: scroll;
     }
+
+    #scroll {
+        position:fixed;
+        right:15px;
+        bottom:12px;
+        cursor:pointer;
+        width:50px;
+        height:50px;
+        background-color:#3498db;
+        text-indent:-9999px;
+        display:none;
+        -webkit-border-radius:60px;
+        -moz-border-radius:60px;
+        border-radius:60px;
+        z-index: 99999999;
+    }
 }
 
 @media screen and (min-width: 600px) {
@@ -73,6 +89,47 @@ html, body {
         overflow-y: scroll;
     }
 
+    #scroll {
+        position:fixed;
+        right:40px;
+        bottom:20px;
+        cursor:pointer;
+        width:50px;
+        height:50px;
+        background-color:#3498db;
+        text-indent:-9999px;
+        display:none;
+        -webkit-border-radius:60px;
+        -moz-border-radius:60px;
+        border-radius:60px;
+        z-index: 99999999;
+    }
+
+}
+
+#editLocationId {
+    display: none;
+}
+
+#depValEdit {
+    display: none;
+}
+
+#scroll span {
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-8px;
+    margin-top:-12px;
+    height:0;
+    width:0;
+    border:8px solid transparent;
+    border-bottom-color:#ffffff;
+}
+#scroll:hover {
+    background-color:#e74c3c;
+    opacity:1;filter:"alpha(opacity=100)";
+    -ms-filter:"alpha(opacity=100)";
 }
 
 li {
@@ -183,6 +240,10 @@ div#search-row.row {
     width: -webkit-fill-available;
 }
 
+select#editDepLoca {
+    width: -webkit-fill-available;
+}
+
 td#submit input#addEmployeeSubmit {
     width: auto;
 }
@@ -201,9 +262,20 @@ td#submit input#addEmployeeSubmit {
     margin: 0 auto;
 }
 
+table#employeeModalTable tbody tr td {
+    padding: 5px;
+}
+
+form#editPerson table tbody tr td {
+    padding: 5px;
+}
+
+div#edit-modalContent.modal-body {
+    padding: 10px;
+}
+
 #edit-delete {
     margin: 10px 0px;
-    display: none;
     text-align: center;
 }
 

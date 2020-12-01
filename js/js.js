@@ -13,12 +13,6 @@ $.ajax({
         $("#profiles").append('<li class="col-xs-6 col-md-3 box" data-first=' + result[i]['firstName'] + ' data-last=' + result[i]['lastName'] + ' data-id=' + result[i]['id'] + ' data-email=' + result[i]['email'] + ' data-department=' + result[i]['department'] + ' data-location=' + result[i]['location'] + '><div class="list-group-item list-group-item-action flex-column align-items-start toggler-enabled" id="profile"><a><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">' + result[i]['lastName'] + ', ' + result[i]['firstName'] + '</h5></div><div><p class="mb-1">' + result[i]['jobTitle'] + '</p><p class="mb-1">' + result[i]['email'] + '</p><p class="mb-1">' + result[i]['department'] + '</p><p class="mb-1">' + result[i]['location'] + '</p></div></a><div class="container" id="edit-delete"><button type="button" class="col-5 btn btn-success btn-sm" name="id" onclick="showModal(' + result[i]['id'] + ')"> Edit </button><button type="submit" class="col-5 btn btn-danger btn-sm personDelete" name="id" value=' + result[i]['id'] + ' onclick="delPerson(' + result[i]['id'] + ')">Delete</button></div></div></li>')
         };
 
-        // Function to show and hide the edit or delete options when a persons profile is clicked
-        $(".toggler-enabled").on("click", function() {
-            var expdiv = $(this).children("div");
-        expdiv.is(":visible")?expdiv.hide():expdiv.show();
-        });
-
         ///////////////////// Edit employee /////////////////////
 
         // Function to edit employee data in the database using values in the edit person modal
@@ -161,7 +155,8 @@ $.ajax({
                 dataType: 'json',
                 data: {
                     name : $("#editDepModal").val(), 
-                    id : $("#depValEdit").val()
+                    id : $("#depValEdit").val(),
+                    location: $("#editDepLoca").val()
                 },
                 success: function(result) {
         
@@ -279,6 +274,7 @@ function editDeptModal(data) {
             // Appends each input value to their respective data
             $("#depValEdit").val(result['id']);
             $("#editDepModal").val(result['name']);
+            $("#editDepLoca").val(result['location']);
             $("#edit-department-modal").modal();
 
         },
@@ -304,6 +300,7 @@ $.ajax({
         for (i=0; i<result.length; i++) {
             $("#locSel").append('<option value=' + result[i]['id'] + '>' + result[i]['name'] + '</option>')
             $("#editLoc").append('<option value=' + result[i]['id'] + '>' + result[i]['name'] + '</option>')
+            $("#editDepLoca").append('<option value=' + result[i]['id'] + '>' + result[i]['name'] + '</option>')
             $("#loca").append('<option value=' + result[i]['name'] + '>' + result[i]['name'] + '</option>')
             $("#locationSel").append('<option value=' + result[i]['id'] + '>' + result[i]['name'] + '</option>')
             $("#locationModal").append('<tr><td>' + result[i]['name'] + '</td><td><button type="button" class="col-5 btn btn-success btn-sm" name="id" onclick="editLocModal(' + result[i]['id'] + ')"> Edit </button></td><td><button type="submit" name="id" class="btn btn-danger btn-sm deleteLocat" data-id=' + result[i]['id'] + ' value=' + result[i]['id'] + ' onclick="deleteLocModal(' + result[i]['id'] + ')">Delete</button></td></tr>')
@@ -531,3 +528,20 @@ function errorajx(jqXHR, exception) {
         }
         console.log(msg);
 };
+
+////////////////////////////////////////////////// Scroll ////////////////////////////////////////////////// 
+
+// Function to scroll back to top of list when scrolled below top
+$(document).ready(function(){ 
+    $(".profile-section").scroll(function(){ 
+        if ($(this).scrollTop() > 100) { 
+            $('#scroll').fadeIn(); 
+        } else { 
+            $('#scroll').fadeOut(); 
+        } 
+    }); 
+    $('#scroll').click(function(){ 
+        $(".profile-section").animate({ scrollTop: 0 }, 600); 
+        return false; 
+    }); 
+});
