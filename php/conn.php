@@ -3,7 +3,7 @@
     // Establish the username, password etc. to be used by all connections to the database
     $servername = "localhost";
     $username = "root";
-    $password = "*****";
+    $password = "banana";
     $dbname = "companydirectory";
 
     // Try catch statement if unsuccesful echo out the error, if succesful establish connection
