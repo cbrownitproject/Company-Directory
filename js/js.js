@@ -5,7 +5,6 @@ $.ajax({
     url: "php/getall.php",
     type: 'POST',
     dataType: 'json',
-    //cache: false,
     success: function(result) {
 
         // Appends each persons profile into the scrollable section
