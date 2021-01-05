@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Meta description -->
-    <meta name="description" content="">
+    <meta name="description" content="html for company personell database project for portfolio">
     <meta name="author" content="Myles King">
 
     <!-- Favicon -->
@@ -23,7 +23,6 @@
     <link rel="stylesheet" type="text/css" href="./css/css.css">
 
     <title>Company Personnel</title>
-
   </head>
  
   <body>
